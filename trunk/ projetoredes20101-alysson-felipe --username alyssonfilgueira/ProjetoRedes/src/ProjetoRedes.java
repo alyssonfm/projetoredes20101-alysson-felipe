@@ -62,12 +62,12 @@ public class ProjetoRedes {
 		Scanner entrance = new Scanner(System.in);
 		System.out.print("Insira o roteador: ");
 		idRoteador = entrance.nextInt();
-		String[] aux = openFile("roteador.config.txt");
+		String[] aux = openFile("roteador.config");
 		if(getRoteadores(aux).contains(idRoteador)){
 			System.out.print(getIps(aux).get(getRoteadores(aux).indexOf(idRoteador)) 
 					+ getPortas(aux).get(getRoteadores(aux).indexOf(idRoteador)));
 		}else{
-			System.err.println("O roteador nao faz parte do arquivo roteador.conf");
+			System.err.println("O roteador nao faz parte do arquivo roteador.config");
 		}
 	}
 
