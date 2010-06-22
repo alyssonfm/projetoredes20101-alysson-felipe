@@ -1,0 +1,5 @@
+Instruções para rodar o projeto:
+
+Primeiro tem-se que renomear o arquivo runProject.bate para runProject.bat, que se encontra na raiz do diretório.
+Para criar cada roteador execute o runProject.bat, que se encontra na raiz do diretorio. Digite no console o numero do roteador e dê ENTER. Caso deseje matar um nó, dê Ctrl+c ou simplesmente feche a janela.
+
