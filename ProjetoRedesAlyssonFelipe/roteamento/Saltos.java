@@ -5,9 +5,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
- * 
- * @author alyssonfm
- *
+ * Classe Saltos. Classe que implementa os "saltos" dos roteadores. <br>
+ * @author Alysson Filgueira e Felipe Barbosa. <br>
+ * @version 1.0.0.5 21 de junho de 2010.<br>
  */
 public class Saltos {
 	private LinkedList<String> conjuntoDeSaltos;
@@ -15,6 +15,7 @@ public class Saltos {
 	/**
 	 * 
 	 */
+	@SuppressWarnings("unchecked")
 	public String toString(){
 		Iterator iterador = iterator();
 		String resultado = "";
@@ -68,6 +69,7 @@ public class Saltos {
 	 * 
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public Iterator iterator(){
 		return conjuntoDeSaltos.iterator();
 	}

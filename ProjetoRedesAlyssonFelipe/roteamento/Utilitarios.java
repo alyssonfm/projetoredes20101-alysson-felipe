@@ -14,12 +14,12 @@ import excecoes.ArquivoNaoEncontradoException;
 
 /**
  * 
- * @author alyssonfm
- *
+ * @author Alysson Filgueira e Felipe Barbosa.<br>
+ * @version 1.0.0.5 21 de junho de 2010.<br>
  */
 public  class Utilitarios {
 	
-	public static final int INFINITO = 50;
+	public static final int INFINITO = 999;
 	public static final String ENLACES = "arquivosConfiguracao/enlaces.config";
 	public static final String ROTEADORES = "arquivosConfiguracao/roteador.config";
 	
@@ -152,6 +152,7 @@ public  class Utilitarios {
 	 * @param idRoteadorMorto
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public static String geraMsgRoteadorMorto(Roteador roteador, String idRoteadorMorto) {
 		String resultado = "!" + idRoteadorMorto + "!" + roteador.getNumeroRoteador() + "#";
 		Iterator it = roteador.getVizinhos().iterator();
@@ -178,7 +179,8 @@ public  class Utilitarios {
 	 * @param idRoteadorMorto
 	 * @return
 	 */
-	public static String geraMsgRoteadorMorto(LinkedList list, String idRoteadorMorto) {
+	@SuppressWarnings("unchecked")
+	public static String geraMsgRoteadorMorto(LinkedList<String> list, String idRoteadorMorto) {
 		String resultado = "!" + idRoteadorMorto + "!";
 		Iterator it = list.iterator();
 		while(it.hasNext()){

@@ -5,12 +5,11 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 
 import roteamento.Roteador;
-import roteamento.Utilitarios;
 
 /**
  * 
- * @author alyssonfm
- *
+ * @author Alysson Filgueira e Felipe Barbosa.<br>
+ * @version 1.0.0.5 21 de junho de 2010.<br>
  */
 public class NoMorto extends No{
 

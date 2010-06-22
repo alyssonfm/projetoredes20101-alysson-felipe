@@ -106,6 +106,7 @@ public class No extends Thread{
 	/**
 	 * 
 	 */
+	@SuppressWarnings("unchecked")
 	public void run() {
 		try {
 			DatagramSocket clientSocket = new DatagramSocket();

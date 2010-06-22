@@ -10,9 +10,9 @@ import conexoes.No;
 import conexoes.Servidor;
 
 /**
- * 
- * @author alyssonfm
- *
+ * Classe Roteador. Classe responsavel por implementar uma abstracao de um roteador real.<br>
+ * @author Alysson Filgueira e Felipe Barbosa. <br>
+ * @version 1.0.0.5 21 de junho de 2010.
  */
 public class Roteador extends TimerTask {
 
@@ -29,32 +29,32 @@ public class Roteador extends TimerTask {
 	private Vizinhos vizinhos;
 
 	/**
-	 * 
+	 * Construtor default da classe Roteador.
 	 */
 	public Roteador() {
 
 	}
 
 	/**
-	 * 
-	 * @param routerNumber
+	 * Construtor da Classe Roteador.<br>
+	 * @param routerNumber - numero do roteador que a classe recebe como parametro.
 	 * @throws Exception
 	 */
 	public Roteador(String routerNumber) throws Exception {
 		this.numeroRoteador = routerNumber;
-		tabela = initializeTable(routerNumber);
+		tabela = inicializaTabela(routerNumber);
 		Saltos conjunto = new Saltos();
 		conjunto.addSalto(routerNumber);
 		tabela.adicionaNovoCaminho(routerNumber, 0, routerNumber, conjunto);
 		this.porta = (String)Utilitarios.getPortaEIp(numeroRoteador).keySet().toArray()[0];
 		this.ip = (String)Utilitarios.getPortaEIp(numeroRoteador).values().toArray()[0];
 		adicionarVizinhos();
-		criaServerAndTime();
+		criaServidorETempo();
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Funcao getServidor(). <br> 
+	 * @return o servidor da rede.
 	 */
 	public Servidor getServidor() {
 		return servidor;
@@ -62,18 +62,19 @@ public class Roteador extends TimerTask {
 
 
 	/**
-	 * 
-	 * @return
+	 * Funcao getNumeroRoteador().<br>
+	 * @return o numero do roteador.
 	 */
 	public String getNumeroRoteador() {
 		return numeroRoteador;
 	}
 
 	/**
-	 * 
+	 * Procedimento sendTable
 	 * @throws Exception
 	 */
-	private void sendTable() throws Exception {
+	@SuppressWarnings("unchecked")
+	private void TabelaDeEnvio() throws Exception {
 		Iterator it = getVizinhos().iterator();
 		while (it.hasNext()) {
 			String idVizinho = (String) it.next();
@@ -82,8 +83,8 @@ public class Roteador extends TimerTask {
 	}
 
 	/**
-	 * 
-	 * @param numeroRoteador
+	 * Procedimento setIdRoteador. <br>
+	 * @param numeroRoteador - id do roteador que estamos atualizando.
 	 */
 	public void setIdRoteador(String numeroRoteador) {
 		this.numeroRoteador = numeroRoteador;
@@ -91,49 +92,49 @@ public class Roteador extends TimerTask {
 
 
 	/**
-	 * 
-	 * @return
+	 * Funcao getIp. <br>
+	 * @return o ip do roteador.
 	 */
 	public String getIp() {
 		return ip;
 	}
 	
 	/**
-	 * 
-	 * @param tabela
+	 * Procedimento setTabela. <br>
+	 * @param tabela - Tabela de Roteamento a ser atualizada como sendo a tabela do roteador.<br>
 	 */
 	public void setTabela(TabelaRoteamento tabela) {
 		this.tabela = tabela;
 	}
 
 	/**
-	 * 
-	 * @param numeroVizinho
-	 * @return
+	 * Funcao getDistancia. <br>
+	 * @param numeroVizinho - identificador do roteador vizinho, ao qual se deseja obter a distancia para chegar ate ele.<br> 
+	 * @return um valor inteiro - a distancia do roteador ate o seu vizinho.
 	 */
 	public int getDistancia(String numeroVizinho) {
 		return this.tabela.getTabela().get(numeroVizinho).getDistancia();
 	}
 
 	/**
-	 * 
-	 * @param ip
+	 * Procedimento setIp. Seta o ip do roteador. <br>
+	 * @param ip - Ip do roteador, caso se deseje atualiza-lo. <br>
 	 */
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Funcao getPorta. Funcao usada para retornar o numero da porta do roteador.
+	 * @return A porta do roteador.
 	 */
 	public String getPorta() {
 		return porta;
 	}
 
 	/**
-	 * 
-	 * @param porta
+	 * Procedimento setPorta. Usado para setar a porta do roteador.<br>
+	 * @param porta A porta do roteador a ser setada. <br>
 	 */
 	public void setPorta(String porta) {
 		this.porta = porta;
@@ -141,32 +142,33 @@ public class Roteador extends TimerTask {
 
 
 	/**
-	 * 
-	 * @param servidor
+	 * Procedimento setServidor. Seta o servidor da rede.<br>
+	 * @param servidor O servidor da rede do roteadro.<br>
 	 */
 	public void setServidor(Servidor servidor) {
 		this.servidor = servidor;
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Funcao getVizinhos. Usada para retornar os vizinhos do roteador.<br>
+	 * @return Os vizinhos do roteador.<br>
 	 */
 	public Vizinhos getVizinhos() {
 		return vizinhos;
 	}
 
 	/**
-	 * 
-	 * @param numeroVizinho
+	 * Procedimento setaNoInfinito. Usado para setar a distancia ate um vizinho para o infinito caso nao se tenha a distancia ate ele.<br>
+	 * @param numeroVizinho Numero do vizinho cuja distancia sera setada para infinito. Vizinho que nao esta ligado, nao se conhece distancia ate ele. <br>
 	 */
+	@SuppressWarnings("unchecked")
 	public void setaNoInfinito(String numeroVizinho) {
 		TabelaRoteamento tabelaRoteamento = getTabela();
 		Saltos conjunto = new Saltos();
 		conjunto.addSalto("*");
 		tabelaRoteamento.adicionaNovoCaminho(numeroVizinho, Utilitarios.INFINITO,
 				"*", conjunto);
-		Set set = tabela.getTabela().keySet();
+		Set<String> set = tabela.getTabela().keySet();
 		Iterator it = set.iterator();
 		while (it.hasNext()) {
 			String nextRoteador = (String) it.next();
@@ -183,9 +185,9 @@ public class Roteador extends TimerTask {
 	}
 	
 	/**
-	 * 
+	 * Procedimendo criaServidorETempo. Cria o servidor e o time para o roteador.
 	 */
-	private void criaServerAndTime() {
+	private void criaServidorETempo() {
 		servidor = new Servidor(this);
 		servidor.start();
 		Timer timer = new Timer();
@@ -193,55 +195,55 @@ public class Roteador extends TimerTask {
 	}
 	
 	/**
-	 * 
-	 * @param vizinhos
+	 * Procedimento setVizinhos. Usado para setar os vizinhos do roteador. <br> 
+	 * @param vizinhos Vizinhos do roteador.<br>
 	 */
 	public void setVizinhos(Vizinhos vizinhos) {
 		this.vizinhos = vizinhos;
 	}
 	
 	/**
-	 * 
-	 * @throws Exception
+	 * Procedimento adicionarVizinhos. Adiciona os vizinhos do roteador a sua tabela de vizinhos. <br>
+	 * @throws Exception Lanca excecao caso os vizinhos a serem adicionados nao facam parte do arquivo de configuracao dos roteadores.
 	 */
 	public void adicionarVizinhos() throws Exception {
 		vizinhos = Utilitarios.retornarVizinhos(getNumeroRoteador());
 	}
 
 	/**
-	 * 
-	 * @param tabelaOrigem
+	 * Procedimento atualizaTabela. Usado para atualizar a tabela de roteamento passada como parametro. <br>
+	 * @param tabelaOrigem Atualiza a tabela passada como parametro. <br>
 	 */
 	public void atualizaTabela(TabelaRoteamento tabelaOrigem) {
 		getTabela().atualizaTabela(tabelaOrigem);
 	}
 
 	/**
-	 * 
-	 * @param numeroRoteador
-	 * @return
-	 * @throws Exception
+	 * Funcao inicializaTabela. Incializa a tabela de roteamento do roteador passado como parametro. <br>
+	 * @param numeroRoteador O numero do roteador que sera inicializada a tabela de roteamento.<br>
+	 * @return A tabela de roteamento inicial do roteador.<br>
+	 * @throws Exception - Lanca excecao caso o numero do roteador passado como parametro nao seja encontrado no arquivo de configuracao dos roteadores. <br>
 	 */
-	public TabelaRoteamento initializeTable(String numeroRoteador) throws Exception {
+	public TabelaRoteamento inicializaTabela(String numeroRoteador) throws Exception {
 		return Utilitarios.inicializarTabela(numeroRoteador);
 	}
 
 	/**
-	 * 
+	 * Procedimento que imprime a tabela de roteamento do roteador, apos passados determinados segundos. <br> 
 	 */
 	@Override
 	public void run() {
 		System.out.println(getTabela());
 		try {
-			sendTable();
+			TabelaDeEnvio();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Funcao getTabela. Retorna a tabela de roteamento do roteador. <br>
+	 * @return a tabela de roteamento do roteador.
 	 */
 	public TabelaRoteamento getTabela() {
 		return tabela;

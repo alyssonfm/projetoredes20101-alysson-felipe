@@ -8,8 +8,8 @@ import java.util.StringTokenizer;
 
 /**
  * 
- * @author alyssonfm
- *
+ * @author Alysson Filgueira e Felipe Barbosa.<br>
+ * @version 1.0.0.5 21 de junho de 2010.<br>
  */
 public class TabelaRoteamento {
 
@@ -27,8 +27,9 @@ public class TabelaRoteamento {
 	/**
 	 * 
 	 */
+	@SuppressWarnings("unchecked")
 	public String toString(){
-		Set set = tabela.keySet();
+		Set<String> set = tabela.keySet();
 		Iterator it = set.iterator();
 		String resultado = "Tabela [" + getIdTabela() + "] \n";
 		while(it.hasNext()){
@@ -99,8 +100,9 @@ public class TabelaRoteamento {
 	 * @param tabela
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public static String transformaTabelaParaString(TabelaRoteamento tabela){
-		Set set = tabela.getTabela().keySet();
+		Set<String> set = tabela.getTabela().keySet();
 		Iterator it = set.iterator();
 		String resultado = tabela.getIdTabela() + "#";
 		while(it.hasNext()){
@@ -121,8 +123,9 @@ public class TabelaRoteamento {
 	 * @param origem
 	 * @param destino
 	 */
+	@SuppressWarnings("unchecked")
 	public static void comparaTabelas(TabelaRoteamento origem, TabelaRoteamento destino){
-		Set setOrigem = origem.getTabela().keySet();
+		Set<String> setOrigem = origem.getTabela().keySet();
 		Iterator it = setOrigem.iterator();
 		while (it.hasNext()){
 			String nextOrigem = (String) it.next();
@@ -147,8 +150,9 @@ public class TabelaRoteamento {
 	 * 
 	 * @param origem
 	 */
+	@SuppressWarnings("unchecked")
 	public void atualizaTabela(TabelaRoteamento origem){
-		Set setOrigem = origem.getTabela().keySet();
+		Set<String> setOrigem = origem.getTabela().keySet();
 		Iterator it = setOrigem.iterator();
 		while (it.hasNext()){
 			String nextOrigem = (String) it.next();

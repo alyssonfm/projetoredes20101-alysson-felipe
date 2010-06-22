@@ -52,6 +52,7 @@ public class Vizinhos {
 	/**
 	 * 
 	 */
+	@SuppressWarnings("unchecked")
 	public String toString(){
 		String resultado = "Vizinhos de " + getIdRoteador() + ": "; 
 		Iterator it = vizinhos.iterator();
@@ -84,6 +85,7 @@ public class Vizinhos {
 	 * 
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public Iterator iterator(){
 		return vizinhos.iterator();
 	}

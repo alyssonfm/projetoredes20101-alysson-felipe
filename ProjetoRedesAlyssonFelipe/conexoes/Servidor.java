@@ -77,6 +77,7 @@ public class Servidor extends Thread {
 	/**
 	 * 
 	 */
+	@SuppressWarnings("unchecked")
 	public void run() {
 		while (true) {
 			try {
