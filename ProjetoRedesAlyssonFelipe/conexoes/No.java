@@ -11,9 +11,9 @@ import roteamento.TabelaRoteamento;
 import roteamento.Utilitarios;
 
 /**
- * Classe No 
+ * Classe No. Classe responsavel por implementar os nos da rede.<br> 
  * @author Alysson Filgueira e Felipe Barbosa<br>
- * @version 1.0.0.5	18 de junho de 2010.
+ * @version 1.0.0.5	18 de junho de 2010.<br>
  *
  */
 
@@ -25,7 +25,7 @@ public class No extends Thread{
 	protected String idRoteadorDestino;
 
 	/**
-	 * 
+	 * Funcao getIdRoteadorDestino. Funcao que retorna o id do roteador de destino.
 	 * @return idRoteadorDestino - o id do roteador de destino.
 	 */
 	public String getIdRoteadorDestino() {
@@ -147,7 +147,7 @@ public class No extends Thread{
 				Iterator it = getRoteador().getVizinhos().iterator();
 				while (it.hasNext()) {
 					String idVizinho = (String) it.next();
-					if (getRoteador().getDistancia(idVizinho) != Utilitarios.INFINITO) {
+					if (getRoteador().getDistancia(idVizinho) != Utilitarios.getValorInfinito()) {
 						System.out
 								.println("{"
 										+ getRoteador().getNumeroRoteador()

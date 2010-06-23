@@ -7,7 +7,7 @@ import roteamento.Roteador;
 import roteamento.Utilitarios;
 
 /**
- * 
+ * Classe Main. Classe principal do programa, na qual todo o processo eh inicializado.<br>
  * @author Alysson Filgueira e Felipe Barbosa. <br>
  * @version 1.0.0.5 18 de junho de 2010.
  */

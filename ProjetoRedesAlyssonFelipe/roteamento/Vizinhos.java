@@ -5,9 +5,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
- * 
- * @author alyssonfm
- *
+ * Classe Vizinhos. E a classe que implementa as funcionalidades relativas aos vizinhos de cada roteador. <br>
+ * @author Alysson Filgueira e Felipe Barbosa.<br>
+ * @version 1.0.0.5 22 de junho de 2010.<br>
  */
 public class Vizinhos {
 

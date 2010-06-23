@@ -3,9 +3,9 @@ package excecoes;
 import java.io.IOException;
 
 /**
- * 
- * @author Alysson Filgueira e Felipe 
- * @version 1.0.0.5 18 de junho de 2010.
+ * Classe ArquivoNaoEncontradoException.<br>
+ * @author Alysson Filgueira e Felipe Barbosa. <br>
+ * @version 1.0.0.5 18 de junho de 2010.<br>
  */
 public class ArquivoNaoEncontradoException extends IOException {
 	

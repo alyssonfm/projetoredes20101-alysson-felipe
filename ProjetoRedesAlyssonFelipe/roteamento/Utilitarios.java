@@ -13,15 +13,39 @@ import java.util.StringTokenizer;
 import excecoes.ArquivoNaoEncontradoException;
 
 /**
- * 
+ * Classe Utilitarios. Classe usada para fornecer algumas funcionalidades a outras classes.<br>
  * @author Alysson Filgueira e Felipe Barbosa.<br>
  * @version 1.0.0.5 21 de junho de 2010.<br>
  */
 public  class Utilitarios {
 	
-	public static final int INFINITO = 999;
-	public static final String ENLACES = "arquivosConfiguracao/enlaces.config";
-	public static final String ROTEADORES = "arquivosConfiguracao/roteador.config";
+	private static final int INFINITO = 9999;
+	private static final String ENLACES = "arquivosConfiguracao/enlaces.config";
+	private static final String ROTEADORES = "arquivosConfiguracao/roteador.config";
+	
+	/**
+	 * Funcao getValorInfinito. Retorna o valor infinito (maior valor inteiro). <br>
+	 * @return INFINITO maior valor inteiro.
+	 */
+	public static int getValorInfinito(){
+		return INFINITO;
+	}
+	
+	/**
+	 * Funcao getPathEnlaces. Retorna o caminho para acessar o arquivo de configuracao dos enlaces. <br>
+	 * @return ENLACES o caminho para o arquivo de configuracao dos enlaces. <br>
+	 */
+	public static String getPathEnlaces(){
+		return ENLACES;
+	}
+	
+	/**
+	 * Funcao getPathRoteadores. Retorna o caminho para acessar o arquivo de configuracao dos roteadores. <br>
+	 * @return ROTEADORES o caminho para o arquivo de configuracao dos roteadores.<br>
+	 */
+	public static String getPathRoteadores(){
+		return ROTEADORES;
+	}
 	
 	/**
 	 * 
@@ -32,7 +56,7 @@ public  class Utilitarios {
 	public static HashMap<String, String> getPortaEIp(String idRoteador) throws Exception{
 		try {
 			HashMap<String, String> portaIp = new HashMap<String, String>();
-			BufferedReader buffer = new BufferedReader(new FileReader(new File(ROTEADORES)));
+			BufferedReader buffer = new BufferedReader(new FileReader(new File(getPathRoteadores())));
 			String linha = null;
 			do {
 				linha = buffer.readLine();
@@ -48,7 +72,7 @@ public  class Utilitarios {
 			} while (linha != null);
 			return null;
 		} catch ( ArquivoNaoEncontradoException ioe ){
-			throw new ArquivoNaoEncontradoException ("Arquivo " + ROTEADORES + " inexistente!");
+			throw new ArquivoNaoEncontradoException ("Arquivo " + getPathRoteadores() + " inexistente!");
 		}
 	}
 	
@@ -61,7 +85,7 @@ public  class Utilitarios {
 	public static Vizinhos retornarVizinhos(String idRoteador) throws Exception{
 		try {
 			Vizinhos vizinhos = new Vizinhos(idRoteador);
-			BufferedReader buffer = new BufferedReader(new FileReader(new File(ENLACES)));
+			BufferedReader buffer = new BufferedReader(new FileReader(new File(getPathEnlaces())));
 			String linha = null;
 			do {
 				linha = buffer.readLine();
@@ -79,7 +103,7 @@ public  class Utilitarios {
 			} while (linha != null);
 			return vizinhos;
 		} catch ( IOException ioe ){
-			throw new Exception ("Arquivo " + ENLACES + " inexistente!");
+			throw new Exception ("Arquivo " + getPathEnlaces() + " inexistente!");
 		}
 	}
 	
@@ -92,7 +116,7 @@ public  class Utilitarios {
 	public static TabelaRoteamento inicializarTabela(String idRoteador) throws Exception{
 		TabelaRoteamento tabela = new TabelaRoteamento(idRoteador);
 		try {
-			BufferedReader buffer = new BufferedReader(new FileReader(new File(ROTEADORES)));
+			BufferedReader buffer = new BufferedReader(new FileReader(new File(getPathRoteadores())));
 			String linha = null;
 			do {
 				linha = buffer.readLine();
@@ -108,12 +132,12 @@ public  class Utilitarios {
 				} else {
 					Saltos conjunto = new Saltos();
 					conjunto.addSalto("*");
-					tabela.adicionaNovoCaminho(roteador,INFINITO,"*",conjunto);
+					tabela.adicionaNovoCaminho(roteador,getValorInfinito(),"*",conjunto);
 				}
 			} while (linha != null);
 			return tabela;
 		} catch ( IOException ioe ){
-			throw new Exception ("Arquivo " + ROTEADORES + " inexistente!");
+			throw new Exception ("Arquivo " + getPathRoteadores() + " inexistente!");
 		}
 	}
 	
@@ -126,7 +150,7 @@ public  class Utilitarios {
 	 */
 	public static int getDistanciaEntreRoteadores(String roteadorA ,String roteadorB) throws Exception{
 		try {
-			BufferedReader buffer = new BufferedReader(new FileReader(new File(ENLACES)));
+			BufferedReader buffer = new BufferedReader(new FileReader(new File(getPathEnlaces())));
 			String linha = null;
 			do {
 				linha = buffer.readLine();
@@ -141,7 +165,7 @@ public  class Utilitarios {
 				} 
 			} while (linha != null);
 		} catch ( IOException ioe ){
-			throw new Exception ("Arquivo " + ENLACES + " inexistente!");
+			throw new Exception ("Arquivo " + getPathEnlaces() + " inexistente!");
 		}
 		return 0;
 	}

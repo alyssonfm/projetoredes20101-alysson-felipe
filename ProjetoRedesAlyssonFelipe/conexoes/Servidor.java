@@ -111,7 +111,7 @@ public class Servidor extends Thread {
 						Iterator it = getRoteador().getVizinhos().iterator();
 						while (it.hasNext()) {
 							String idVizinho = (String) it.next();
-							if ((getRoteador().getDistancia(idVizinho) != Utilitarios.INFINITO) && (!listaReceberam.contains(idVizinho)))  {
+							if ((getRoteador().getDistancia(idVizinho) != Utilitarios.getValorInfinito()) && (!listaReceberam.contains(idVizinho)))  {
 
 								Iterator it2 = getRoteador().getVizinhos().iterator();
 								while (it2.hasNext()) {

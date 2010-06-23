@@ -2,9 +2,9 @@
 package roteamento;
 
 /**
- * 
- * @author alyssonfm
- *
+ * Classe SaltosEDistancia.
+ * @author Alysson Filgueira e Felipe Barbosa.<br>
+ * @version 1.0.0.5 22 de junho de 2010.<br>
  */
 public class SaltosEDistancia {
 	private Saltos conjuntoDeSaltos;

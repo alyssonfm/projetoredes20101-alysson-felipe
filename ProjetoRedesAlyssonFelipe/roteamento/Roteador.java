@@ -17,15 +17,10 @@ import conexoes.Servidor;
 public class Roteador extends TimerTask {
 
 	private Servidor servidor;
-
 	private String numeroRoteador;
-
 	private String porta;
-
 	private String ip;
-
 	private TabelaRoteamento tabela;
-
 	private Vizinhos vizinhos;
 
 	/**
@@ -166,7 +161,7 @@ public class Roteador extends TimerTask {
 		TabelaRoteamento tabelaRoteamento = getTabela();
 		Saltos conjunto = new Saltos();
 		conjunto.addSalto("*");
-		tabelaRoteamento.adicionaNovoCaminho(numeroVizinho, Utilitarios.INFINITO,
+		tabelaRoteamento.adicionaNovoCaminho(numeroVizinho, Utilitarios.getValorInfinito(),
 				"*", conjunto);
 		Set<String> set = tabela.getTabela().keySet();
 		Iterator it = set.iterator();
@@ -175,7 +170,7 @@ public class Roteador extends TimerTask {
 			SaltosEDistancia ds = tabela.getTabela().get(nextRoteador);
 			Saltos conjuntoDeSaltos = ds.getConjuntoDeSaltos();
 			if (conjuntoDeSaltos.contem(numeroVizinho)) {
-				SaltosEDistancia novoDS = new SaltosEDistancia(Utilitarios.INFINITO,
+				SaltosEDistancia novoDS = new SaltosEDistancia(Utilitarios.getValorInfinito(),
 						"*", conjunto);
 				getTabela().adicionaNovoCaminho(novoDS, nextRoteador);
 			}
