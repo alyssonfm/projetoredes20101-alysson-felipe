@@ -14,9 +14,9 @@ import roteamento.Saltos;
 import roteamento.Utilitarios;
 
 /**
- * 
- * @author Alysson
- *
+ * Classe Servidor. Classe responsavel por implementar as funcionalidades do servidor UDP do sistema.<br>
+ * @author Alysson Filgueira e Felipe Barbosa.<br>
+ * @version 1.0.0.5 24 de junho de 2010.
  */
 public class Servidor extends Thread {
 	private Roteador roteador;
@@ -24,15 +24,15 @@ public class Servidor extends Thread {
 
 
 	/**
-	 * 
+	 * Construtor padrao da classe.
 	 */
 	public Servidor() {
 
 	}
 
 	/**
-	 * 
-	 * @param roteador
+	 * Construtor que recebe um roteador como parametro.<br>
+	 * @param roteador o roteador que esta sendo adicionado ao servidor.<br>
 	 */
 	public Servidor(Roteador roteador) {
 		super("Servidor Numero porta: [ " + roteador.getPorta() + " ] - IP: "
@@ -43,39 +43,39 @@ public class Servidor extends Thread {
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Funcao getPorta. Retorna a porta do roteador que eh passado como parametro no construtor ou no procedimento setPorta.<br>
+	 * @return A porta do roteador.
 	 */
 	public String getPorta() {
 		return porta;
 	}
 
 	/**
-	 * 
-	 * @param porta
+	 * Procedimento setPorta. Atualiza a porta do roteador, passando um novo valor para a porta como parametro.<br>
+	 * @param porta A nova porta do roteador.<br>
 	 */
 	public void setPorta(String porta) {
 		this.porta = porta;
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Funcao getRoteador. Retorna o roteador que foi passado como parametro no construtor ou no procedimento setRoteador.<br>
+	 * @return O roteador.<br>
 	 */
 	public Roteador getRoteador() {
 		return roteador;
 	}
 
 	/**
-	 * 
-	 * @param roteador
+	 * Procedimento setRoteador. Atualiza o roteador da rede.
+	 * @param roteador O roteador que atualiza o antigo roteador da rede.<br>
 	 */
 	public void setRoteador(Roteador roteador) {
 		this.roteador = roteador;
 	}
 
 	/**
-	 * 
+	 * Procedimento run. Responsavel pela funcionalidade do servidor, as trocas de pacotes (e mensagens) entre os roteadores. <br>
 	 */
 	@SuppressWarnings("unchecked")
 	public void run() {

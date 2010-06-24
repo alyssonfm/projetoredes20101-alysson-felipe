@@ -23,6 +23,23 @@ public class No extends Thread{
 	protected Roteador roteador;
 	protected String ipRoteadorDestino;
 	protected String idRoteadorDestino;
+	protected static int timeout = 1000;
+	
+	/**
+	 * Funcao getTimeOut. Retorna o timeOut do no.<br>
+	 * @return TimeOut do no.
+	 */
+	public static int getTimeOut(){
+		return timeout;
+	}
+	
+	/**
+	 * Procedimento setTimeOut. Usado para atualizar o valor do timeOut do no, permite tornar o timeOut configuravel.<br>
+	 * @param time O valor que atualizara o timeOut do no.
+	 */
+	public static void setTimeOut(int time){
+		timeout = time;
+	}
 
 	/**
 	 * Funcao getIdRoteadorDestino. Funcao que retorna o id do roteador de destino.
@@ -110,8 +127,7 @@ public class No extends Thread{
 	public void run() {
 		try {
 			DatagramSocket clientSocket = new DatagramSocket();
-			InetAddress IPAddress = InetAddress
-					.getByName(getIpRoteadorDestino());
+			InetAddress IPAddress = InetAddress.getByName(getIpRoteadorDestino());
 
 			byte[] sendData = new byte[1024];
 			byte[] receiveData = new byte[1024];
@@ -123,7 +139,7 @@ public class No extends Thread{
 
 			sendData = sentence.getBytes();
 
-			clientSocket.setSoTimeout(1000);
+			clientSocket.setSoTimeout(getTimeOut());
 			DatagramPacket sendPacket = new DatagramPacket(sendData,
 					sendData.length, IPAddress, Integer
 							.parseInt(getPortaDestino()));
