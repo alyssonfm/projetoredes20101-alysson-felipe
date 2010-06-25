@@ -35,7 +35,7 @@ public class TabelaRoteamento {
 		while(it.hasNext()){
 			String next = (String) it.next();
 			SaltosEDistancia distAndSalto = tabela.get(next);
-			resultado += "[ " + next + " ] = " + distAndSalto.getDistancia() + " UD - Proximo Salto: " + distAndSalto.getSalto() + "\n"; 
+			resultado += "[ " + next + " ] = " + distAndSalto.getDistancia() + " - Proximo Salto: [" + distAndSalto.getSalto() + "]\n"; 
 		}
 		return resultado;
 	}

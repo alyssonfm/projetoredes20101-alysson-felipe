@@ -16,15 +16,16 @@ import roteamento.Utilitarios;
 /**
  * Classe Servidor. Classe responsavel por implementar as funcionalidades do servidor UDP do sistema.<br>
  * @author Alysson Filgueira e Felipe Barbosa.<br>
- * @version 1.0.0.5 24 de junho de 2010.
+ * @version 1.0.0.5 24 de junho de 2010.<br>
  */
 public class Servidor extends Thread {
 	private Roteador roteador;
 	private String porta;
+	private int tempoSleep = 10;
 
 
 	/**
-	 * Construtor padrao da classe.
+	 * Construtor padrao da classe.<br>
 	 */
 	public Servidor() {
 
@@ -44,10 +45,10 @@ public class Servidor extends Thread {
 
 	/**
 	 * Funcao getPorta. Retorna a porta do roteador que eh passado como parametro no construtor ou no procedimento setPorta.<br>
-	 * @return A porta do roteador.
+	 * @return A porta do roteador.<br>
 	 */
 	public String getPorta() {
-		return porta;
+		return this.porta;
 	}
 
 	/**
@@ -63,15 +64,31 @@ public class Servidor extends Thread {
 	 * @return O roteador.<br>
 	 */
 	public Roteador getRoteador() {
-		return roteador;
+		return this.roteador;
 	}
 
 	/**
-	 * Procedimento setRoteador. Atualiza o roteador da rede.
+	 * Procedimento setRoteador. Atualiza o roteador da rede.<br>
 	 * @param roteador O roteador que atualiza o antigo roteador da rede.<br>
 	 */
 	public void setRoteador(Roteador roteador) {
 		this.roteador = roteador;
+	}
+	
+	/**
+	 * Funcao getTempoSleep. Funcao que retorna o tempo no qual a thread em execucao dorme (cessa a execucao temporariamente). <br> 
+	 * @return O tempo de sleep para a thread atual.<br>
+	 */
+	public int getTempoSleep(){
+		return this.tempoSleep;
+	}
+	
+	/**
+	 * Procedimento setTempoSleep. Procedimento no qual podemos atualizar o tempo para sleep da thread do servidor.<br>
+	 * @param time O novo tempo para sleep.<br>
+	 */
+	public void setTempoSleep(int time){
+		this.tempoSleep = time;
 	}
 
 	/**
@@ -81,7 +98,7 @@ public class Servidor extends Thread {
 	public void run() {
 		while (true) {
 			try {
-				sleep(10);				
+				sleep(getTempoSleep());				
 				DatagramSocket serverSocket = new DatagramSocket(Integer.parseInt(getPorta()));
 				byte[] receiveData = new byte[1024];
 				byte[] sendData = new byte[1024];
@@ -155,8 +172,8 @@ public class Servidor extends Thread {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("Error!!!!");
-				new Exception("Error!");
+				System.out.println("Erro!!!!");
+				new Exception("Erro durante a execucao do servidor!");
 			}
 		}
 	}

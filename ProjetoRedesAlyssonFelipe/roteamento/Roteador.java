@@ -22,6 +22,8 @@ public class Roteador extends TimerTask {
 	private String ip;
 	private TabelaRoteamento tabela;
 	private Vizinhos vizinhos;
+	private static int delay = 10000;
+	private static int periodo = 10000;
 
 	/**
 	 * Construtor default da classe Roteador.
@@ -160,9 +162,9 @@ public class Roteador extends TimerTask {
 	public void setaNoInfinito(String numeroVizinho) {
 		TabelaRoteamento tabelaRoteamento = getTabela();
 		Saltos conjunto = new Saltos();
-		conjunto.addSalto("*");
+		conjunto.addSalto("***");
 		tabelaRoteamento.adicionaNovoCaminho(numeroVizinho, Utilitarios.getValorInfinito(),
-				"*", conjunto);
+				"***", conjunto);
 		Set<String> set = tabela.getTabela().keySet();
 		Iterator it = set.iterator();
 		while (it.hasNext()) {
@@ -171,12 +173,43 @@ public class Roteador extends TimerTask {
 			Saltos conjuntoDeSaltos = ds.getConjuntoDeSaltos();
 			if (conjuntoDeSaltos.contem(numeroVizinho)) {
 				SaltosEDistancia novoDS = new SaltosEDistancia(Utilitarios.getValorInfinito(),
-						"*", conjunto);
+						"***", conjunto);
 				getTabela().adicionaNovoCaminho(novoDS, nextRoteador);
 			}
 		}
-	
 
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public static int getDelay(){
+		return delay;
+	}
+	
+	/**
+	 * 
+	 * @param delay
+	 */
+	public static void setDelay(int d){
+		delay = d;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public static int getPeriodo(){
+		return periodo;
+	}
+	
+	/**
+	 * 
+	 * @param periodo
+	 */
+	public static void setPeriodo(int p) {
+		periodo = p;
 	}
 	
 	/**
@@ -186,7 +219,7 @@ public class Roteador extends TimerTask {
 		servidor = new Servidor(this);
 		servidor.start();
 		Timer timer = new Timer();
-		timer.schedule(this, 10000, 10000);
+		timer.schedule(this, getDelay(), getPeriodo());
 	}
 	
 	/**

@@ -131,8 +131,8 @@ public  class Utilitarios {
 					tabela.adicionaNovoCaminho(idRoteador, 0 , idRoteador,conjunto);
 				} else {
 					Saltos conjunto = new Saltos();
-					conjunto.addSalto("*");
-					tabela.adicionaNovoCaminho(roteador,getValorInfinito(),"*",conjunto);
+					conjunto.addSalto("***");
+					tabela.adicionaNovoCaminho(roteador,getValorInfinito(),"***",conjunto);
 				}
 			} while (linha != null);
 			return tabela;

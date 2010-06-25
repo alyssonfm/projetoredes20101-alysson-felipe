@@ -7,7 +7,10 @@ import java.net.InetAddress;
 import roteamento.Roteador;
 
 /**
- * 
+ * Classe NoMorto. Subclasse da classe No, a classe NoMorto eh usada para 
+ * simular o que acontece caso um no morra (nao envie sua tabela de roteamento aos demais nos), 
+ * um no ao detectar um no como morto avisa aos seus vizinhos que o no morreu, 
+ * para que os mesmos atualizem as suas tabelas de roteamento.<br>
  * @author Alysson Filgueira e Felipe Barbosa.<br>
  * @version 1.0.0.5 21 de junho de 2010.<br>
  */
@@ -15,36 +18,35 @@ public class NoMorto extends No{
 
 	private String avisoRoteadorMorto;
 	
-
 	/**
-	 * 
-	 * @return
+	 * Construtor da Classe.<br>
+	 * @param roteador o roteador do no morto.<br>
+	 * @param idDestino o id do roteador de destino.<br>
+	 * @param avisoRoteadorMorto o aviso de que o roteador do no esta morto.<br>
+	 * @throws Exception Pode lancar excecao caso a funcao getPortaEIp da classe Utilitarios lance excecao.<br>
+	 */
+	public NoMorto(Roteador roteador, String idDestino, String avisoRoteadorMorto) throws Exception {
+		// Usa o construtor da classe pai para os parametros que sao iguais.
+		super(roteador, idDestino);
+		// Parte do construtor que difere do construtor da classe pai.
+		this.avisoRoteadorMorto = avisoRoteadorMorto;
+		executaCliente();
+	}
+	
+	/**
+	 * Funcao getAvisoRoteadorMorto. Funcao usada para pegar o aviso de que um no na rede esta morto.<br>
+	 * @return o aviso de que o no morreu.<br>
 	 */
 	public String getAvisoRoteadorMorto() {
 		return avisoRoteadorMorto;
 	}
 
 	/**
-	 * 
-	 * @param avisoRoteadorMorto
+	 * Procedimento setAvisoRoteadorMorto. Usado para atualizar o aviso do roteador morto.<br>
+	 * @param avisoRoteadorMorto o aviso do roteador morto.<br>
 	 */
 	public void setAvisoRoteadorMorto(String avisoRoteadorMorto) {
 		this.avisoRoteadorMorto = avisoRoteadorMorto;
-	}
-
-	/**
-	 * 
-	 * @param roteador
-	 * @param idDestino
-	 * @param avisoRoteadorMorto
-	 * @throws Exception
-	 */
-	public NoMorto(Roteador roteador, String idDestino, String avisoRoteadorMorto)
-			throws Exception {
-
-		super(roteador, idDestino);
-		this.avisoRoteadorMorto = avisoRoteadorMorto;
-		executaCliente();
 	}
 
 	/**
@@ -63,7 +65,7 @@ public class NoMorto extends No{
 
 			sendData = sentence.getBytes();
 
-			clientSocket.setSoTimeout(1000);
+			clientSocket.setSoTimeout(getTimeOut());
 			DatagramPacket sendPacket = new DatagramPacket(sendData,
 					sendData.length, IPAddress, Integer
 							.parseInt(getPortaDestino()));
