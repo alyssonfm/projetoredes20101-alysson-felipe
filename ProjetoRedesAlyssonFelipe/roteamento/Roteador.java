@@ -10,9 +10,10 @@ import conexoes.No;
 import conexoes.Servidor;
 
 /**
- * Classe Roteador. Classe responsavel por implementar uma abstracao de um roteador real.<br>
+ * Classe Roteador. Classe responsavel por implementar 
+ * uma abstracao de um roteador real.<br>
  * @author Alysson Filgueira e Felipe Barbosa. <br>
- * @version 1.0.0.5 21 de junho de 2010.
+ * @version 1.0.0.5 25 de junho de 2010.
  */
 public class Roteador extends TimerTask {
 
@@ -22,8 +23,8 @@ public class Roteador extends TimerTask {
 	private String ip;
 	private TabelaRoteamento tabela;
 	private Vizinhos vizinhos;
-	private static int delay = 10000;
-	private static int periodo = 10000;
+	private static int delay = 6000;
+	private static int periodo = 6000;
 
 	/**
 	 * Construtor default da classe Roteador.
@@ -33,9 +34,11 @@ public class Roteador extends TimerTask {
 	}
 
 	/**
-	 * Construtor da Classe Roteador.<br>
-	 * @param routerNumber - numero do roteador que a classe recebe como parametro.
-	 * @throws Exception
+	 * Construtor da Classe Roteador, recebe uma string como parametro, 
+	 * o numero do roteador a ser criado.<br>
+	 * @param routerNumber - numero do roteador que a classe recebe como parametro. <br>
+	 * @throws Exception Excecao que pode ser lancada pelo uso da funcao 
+	 * getPortaEIp da classe Utilitarios.<br>
 	 */
 	public Roteador(String routerNumber) throws Exception {
 		this.numeroRoteador = routerNumber;
@@ -67,8 +70,10 @@ public class Roteador extends TimerTask {
 	}
 
 	/**
-	 * Procedimento sendTable
-	 * @throws Exception
+	 * Procedimento TabelaDeEnvio, usado para 
+	 * criar a tabela de envio do roteador.<br>
+	 * @throws Exception Excecao que pode ser lancada pelo uso da funcao 
+	 * getPortaEIp da classe Utilitarios.<br>
 	 */
 	@SuppressWarnings("unchecked")
 	private void TabelaDeEnvio() throws Exception {
@@ -80,8 +85,8 @@ public class Roteador extends TimerTask {
 	}
 
 	/**
-	 * Procedimento setIdRoteador. <br>
-	 * @param numeroRoteador - id do roteador que estamos atualizando.
+	 * Procedimento setIdRoteador, usado para atualizar o id do roteador. <br>
+	 * @param numeroRoteador - id do roteador que estamos atualizando.<br>
 	 */
 	public void setIdRoteador(String numeroRoteador) {
 		this.numeroRoteador = numeroRoteador;
@@ -90,14 +95,16 @@ public class Roteador extends TimerTask {
 
 	/**
 	 * Funcao getIp. <br>
-	 * @return o ip do roteador.
+	 * @return o ip do roteador.<br>
 	 */
 	public String getIp() {
 		return ip;
 	}
 	
 	/**
-	 * Procedimento setTabela. <br>
+	 * Procedimento setTabela, atualiza a tabela de roteamento do servidor, 
+	 * usada a medida que o roteador atualiza a sua tabela no decorrer 
+	 * da execucao do programa. <br>
 	 * @param tabela - Tabela de Roteamento a ser atualizada como sendo a tabela do roteador.<br>
 	 */
 	public void setTabela(TabelaRoteamento tabela) {
@@ -114,7 +121,7 @@ public class Roteador extends TimerTask {
 	}
 
 	/**
-	 * Procedimento setIp. Seta o ip do roteador. <br>
+	 * Procedimento setIp. Atualiza o ip do roteador. <br>
 	 * @param ip - Ip do roteador, caso se deseje atualiza-lo. <br>
 	 */
 	public void setIp(String ip) {
@@ -122,16 +129,16 @@ public class Roteador extends TimerTask {
 	}
 
 	/**
-	 * Funcao getPorta. Funcao usada para retornar o numero da porta do roteador.
-	 * @return A porta do roteador.
+	 * Funcao getPorta. Funcao usada para retornar a porta do roteador.<br>
+	 * @return A porta do roteador.<br>
 	 */
 	public String getPorta() {
 		return porta;
 	}
 
 	/**
-	 * Procedimento setPorta. Usado para setar a porta do roteador.<br>
-	 * @param porta A porta do roteador a ser setada. <br>
+	 * Procedimento setPorta. Usado para atualizar a porta do roteador.<br>
+	 * @param porta A porta do roteador a ser atualizada. <br>
 	 */
 	public void setPorta(String porta) {
 		this.porta = porta;
@@ -139,8 +146,8 @@ public class Roteador extends TimerTask {
 
 
 	/**
-	 * Procedimento setServidor. Seta o servidor da rede.<br>
-	 * @param servidor O servidor da rede do roteadro.<br>
+	 * Procedimento setServidor. Atualiza o servidor da rede.<br>
+	 * @param servidor O servidor da rede do roteador.<br>
 	 */
 	public void setServidor(Servidor servidor) {
 		this.servidor = servidor;
@@ -155,16 +162,19 @@ public class Roteador extends TimerTask {
 	}
 
 	/**
-	 * Procedimento setaNoInfinito. Usado para setar a distancia ate um vizinho para o infinito caso nao se tenha a distancia ate ele.<br>
-	 * @param numeroVizinho Numero do vizinho cuja distancia sera setada para infinito. Vizinho que nao esta ligado, nao se conhece distancia ate ele. <br>
+	 * Procedimento setaNoInfinito. Usado para setar a distancia ate 
+	 * um vizinho para o infinito caso nao se tenha a distancia ate ele.<br>
+	 * @param numeroVizinho Numero do vizinho cuja distancia 
+	 * sera setada para infinito. Vizinho que nao esta ligado ou 
+	 * nao se conhece distancia ate ele. <br>
 	 */
 	@SuppressWarnings("unchecked")
 	public void setaNoInfinito(String numeroVizinho) {
 		TabelaRoteamento tabelaRoteamento = getTabela();
 		Saltos conjunto = new Saltos();
-		conjunto.addSalto("***");
+		conjunto.addSalto("*");
 		tabelaRoteamento.adicionaNovoCaminho(numeroVizinho, Utilitarios.getValorInfinito(),
-				"***", conjunto);
+				"*", conjunto);
 		Set<String> set = tabela.getTabela().keySet();
 		Iterator it = set.iterator();
 		while (it.hasNext()) {
@@ -173,7 +183,7 @@ public class Roteador extends TimerTask {
 			Saltos conjuntoDeSaltos = ds.getConjuntoDeSaltos();
 			if (conjuntoDeSaltos.contem(numeroVizinho)) {
 				SaltosEDistancia novoDS = new SaltosEDistancia(Utilitarios.getValorInfinito(),
-						"***", conjunto);
+						"*", conjunto);
 				getTabela().adicionaNovoCaminho(novoDS, nextRoteador);
 			}
 		}
@@ -181,39 +191,46 @@ public class Roteador extends TimerTask {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Funcao getDelay. Usada para retornar o tempo de delay do roteador.<br>
+	 * @return o tempo de delay do roteador.<br>
 	 */
 	public static int getDelay(){
 		return delay;
 	}
 	
 	/**
-	 * 
-	 * @param delay
+	 * Procedimento setDelay, usado para atualizar o tempo para delay
+	 * do roteador, permite configurar o tempo usado pelo roteador
+	 * para realizar a troca de mensagens com os demais roteadores
+	 * da rede.<br>
+	 * @param delay o tempo de delay que sera atualizado.<br>
 	 */
 	public static void setDelay(int d){
 		delay = d;
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Funcao getPeriodo, usada para retornar o tempo de periodo do roteador.<br>
+	 * @return o tempo do periodo do roteador.<br>
 	 */
 	public static int getPeriodo(){
 		return periodo;
 	}
 	
 	/**
-	 * 
-	 * @param periodo
+	 * Procedimento usado para atualizar o tempo para o periodo
+	 * do roteador, permite configurar o tempo usado pelo roteador
+	 * para realizar a troca de mensagens com os demais roteadores
+	 * da rede.<br>
+	 * @param periodo o tempo para o periodo que sera atualizado.<br>
 	 */
 	public static void setPeriodo(int p) {
 		periodo = p;
 	}
 	
 	/**
-	 * Procedimendo criaServidorETempo. Cria o servidor e o time para o roteador.
+	 * Procedimendo criaServidorETempo. 
+	 * Cria o servidor e o tempo de troca das mensagens do roteador.<br>
 	 */
 	private void criaServidorETempo() {
 		servidor = new Servidor(this);
@@ -223,23 +240,30 @@ public class Roteador extends TimerTask {
 	}
 	
 	/**
-	 * Procedimento setVizinhos. Usado para setar os vizinhos do roteador. <br> 
-	 * @param vizinhos Vizinhos do roteador.<br>
+	 * Procedimento setVizinhos. Usado para atualizar
+	 *  os vizinhos do roteador. <br> 
+	 * @param vizinhos Vizinhos do roteador a serem atualizados.<br>
 	 */
 	public void setVizinhos(Vizinhos vizinhos) {
 		this.vizinhos = vizinhos;
 	}
 	
 	/**
-	 * Procedimento adicionarVizinhos. Adiciona os vizinhos do roteador a sua tabela de vizinhos. <br>
-	 * @throws Exception Lanca excecao caso os vizinhos a serem adicionados nao facam parte do arquivo de configuracao dos roteadores.
+	 * Procedimento adicionarVizinhos. 
+	 * Adiciona os vizinhos do roteador 
+	 * a sua tabela de vizinhos. <br>
+	 * @throws Exception Lanca excecao caso 
+	 * os vizinhos a serem adicionados nao facam 
+	 * parte do arquivo de configuracao dos roteadores.<br>
 	 */
 	public void adicionarVizinhos() throws Exception {
 		vizinhos = Utilitarios.retornarVizinhos(getNumeroRoteador());
 	}
 
 	/**
-	 * Procedimento atualizaTabela. Usado para atualizar a tabela de roteamento passada como parametro. <br>
+	 * Procedimento atualizaTabela. 
+	 * Usado para atualizar a tabela de roteamento 
+	 * passada como parametro. <br>
 	 * @param tabelaOrigem Atualiza a tabela passada como parametro. <br>
 	 */
 	public void atualizaTabela(TabelaRoteamento tabelaOrigem) {
@@ -247,17 +271,22 @@ public class Roteador extends TimerTask {
 	}
 
 	/**
-	 * Funcao inicializaTabela. Incializa a tabela de roteamento do roteador passado como parametro. <br>
-	 * @param numeroRoteador O numero do roteador que sera inicializada a tabela de roteamento.<br>
+	 * Funcao inicializaTabela. Incializa a tabela de 
+	 * roteamento do roteador passado como parametro. <br>
+	 * @param numeroRoteador O numero do roteador que sera 
+	 * inicializada a tabela de roteamento.<br>
 	 * @return A tabela de roteamento inicial do roteador.<br>
-	 * @throws Exception - Lanca excecao caso o numero do roteador passado como parametro nao seja encontrado no arquivo de configuracao dos roteadores. <br>
+	 * @throws Exception - Lanca excecao caso o numero do 
+	 * roteador passado como parametro nao seja encontrado 
+	 * no arquivo de configuracao dos roteadores. <br>
 	 */
 	public TabelaRoteamento inicializaTabela(String numeroRoteador) throws Exception {
 		return Utilitarios.inicializarTabela(numeroRoteador);
 	}
 
 	/**
-	 * Procedimento que imprime a tabela de roteamento do roteador, apos passados determinados segundos. <br> 
+	 * Procedimento que imprime a tabela de roteamento do roteador, 
+	 * apos passados determinados segundos. <br> 
 	 */
 	@Override
 	public void run() {
@@ -271,7 +300,7 @@ public class Roteador extends TimerTask {
 
 	/**
 	 * Funcao getTabela. Retorna a tabela de roteamento do roteador. <br>
-	 * @return a tabela de roteamento do roteador.
+	 * @return a tabela de roteamento do roteador.<br>
 	 */
 	public TabelaRoteamento getTabela() {
 		return tabela;

@@ -8,16 +8,20 @@ import roteamento.Utilitarios;
 import conexoes.No;
 
 /**
- * Classe Main. Classe principal do programa, na qual inicializamos o roteador que iremos usar na simulacao da rede.<br>
+ * Classe Main. Classe principal do programa, 
+ * na qual inicializamos o roteador que 
+ * iremos usar na simulacao da rede. Alem disso eh possivel 
+ * alterar configuracoes do programa.<br>
  * @author Alysson Filgueira e Felipe Barbosa. <br>
- * @version 1.0.0.5 18 de junho de 2010.
+ * @version 1.0.0.5 25 de junho de 2010.
  */
 public class Main {
 	
 	private static Scanner scanner = new Scanner(System.in);
 	
 	/**
-	 * Procedimento escolherRoteador. Procedimento usado para escolha do roteador que se deseja criar na rede.<br>
+	 * Procedimento escolherRoteador. Procedimento usado para 
+	 * escolha do roteador que se deseja criar na rede.<br>
 	 */
 	public static void escolherRoteador(){
 		String numeroRoteador;
@@ -31,6 +35,7 @@ public class Main {
 				}
 			}
 			while(Utilitarios.getPortaEIp(numeroRoteador) == null);
+			
 			@SuppressWarnings("unused")
 			Roteador roteador = new Roteador(numeroRoteador) ;
 		} catch (Exception ex ) {
@@ -41,7 +46,9 @@ public class Main {
 	}
 	
 	/**
-	 * 
+	 * Procedimento atualizaConfiguracoes. Procedimento no qual eh possivel alterar as 
+	 * configuracoes padrao do sistema, podendo alterar o time out
+	 * o tempo de delay e do periodo de envio das mensagens dos roteadores.<br>
 	 */
 	public static void atualizarConfiguracoes(){
 		setarTO();
@@ -49,6 +56,11 @@ public class Main {
 		escolherRoteador();
 	}
 	
+	/**
+	 * Procedimento setarTempoTrocaMsgs. Procedimento no qual
+	 * podemos alterar o tempo para a troca das mensagens entre
+	 * os roteadores.<br>
+	 */
 	public static void setarTempoTrocaMsgs(){
 		int delay, periodo;
 		System.out.println("Informe o novo valor para o delay (em milisegundos): ");
@@ -60,7 +72,8 @@ public class Main {
 	}
 	
 	/**
-	 * Procedimento setarTO. Procedimento que permite atualizar o tempo para time-out dos nos da rede.<br>
+	 * Procedimento setarTO. Procedimento que permite 
+	 * atualizar o tempo para time-out dos nos da rede.<br>
 	 */
 	public static void setarTO(){
 		int timeout;
@@ -69,10 +82,17 @@ public class Main {
 		No.setTimeOut(timeout);
 	}
 
-	public static void main(String[] args) {
-		
+	/**
+	 * Procedimento main. Procedimento principal do programa, 
+	 * no qual ocorre a interacao com o usuario, a qual ocorre
+	 * por meio de um menu de opcoes para utilizacao do programa.<br>
+	 * @param args
+	 */
+	public static void main(String[] args) {		
 		int escolha;		
-		System.out.println("\t\t=====Menu===== \n1- Alterar configuracoes\n2- Escolher roteador e usar configuracoes padrao");
+		System.out.println("\t\tProjeto de Redes de Computadores 2010-1");
+		System.out.println("\t\tAlysson Filgueira e Felipe Barbosa");
+		System.out.println("\t\t=====Menu===== \n1- Alterar configuracoes\n2- Escolher roteador e usar configuracoes padrao\n3- Para encerrar o programa");
 		escolha = scanner.nextInt();
 		switch (escolha) {
 		case 1:
@@ -80,6 +100,9 @@ public class Main {
 			break;
 		case 2:
 			escolherRoteador();
+			break;
+		case 3:
+			System.out.println("Programa sendo encerrado...");
 			break;
 		default:
 			break;

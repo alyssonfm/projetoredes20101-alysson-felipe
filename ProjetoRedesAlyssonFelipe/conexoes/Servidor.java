@@ -8,6 +8,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.StringTokenizer;
 
+import excecoes.ServidorException;
+
 import roteamento.Roteador;
 import roteamento.TabelaRoteamento;
 import roteamento.Saltos;
@@ -16,7 +18,7 @@ import roteamento.Utilitarios;
 /**
  * Classe Servidor. Classe responsavel por implementar as funcionalidades do servidor UDP do sistema.<br>
  * @author Alysson Filgueira e Felipe Barbosa.<br>
- * @version 1.0.0.5 24 de junho de 2010.<br>
+ * @version 1.0.0.5 25 de junho de 2010.<br>
  */
 public class Servidor extends Thread {
 	private Roteador roteador;
@@ -92,7 +94,8 @@ public class Servidor extends Thread {
 	}
 
 	/**
-	 * Procedimento run. Responsavel pela funcionalidade do servidor, as trocas de pacotes (e mensagens) entre os roteadores. <br>
+	 * Procedimento run. Responsavel pela funcionalidade do servidor, 
+	 * as trocas de pacotes (e mensagens) entre os roteadores. <br>
 	 */
 	@SuppressWarnings("unchecked")
 	public void run() {
@@ -139,13 +142,16 @@ public class Servidor extends Thread {
 								}
 								String msgRoteadorMorto = Utilitarios.geraMsgRoteadorMorto(listaReceberam,	idRoteadorMorto);
 
-								System.out.println("[" + getRoteador().getNumeroRoteador() + "] Enviou Aviso de Morte do (" + Utilitarios.pegaRoteadorMortoPelaMsg(msgRoteadorMorto) + ") para [" + idVizinho + "]" );
+								System.out.println("[" + getRoteador().getNumeroRoteador() 
+										+ "] Enviou Aviso de Morte de: (" + 
+										Utilitarios.pegaRoteadorMortoPelaMsg(msgRoteadorMorto) + ")" +
+												" para: [" + idVizinho + "]" );
 								new NoMorto(getRoteador(), idVizinho, msgRoteadorMorto);
 							}
 						}
 					} else {
 						TabelaRoteamento tabelaVizinho = TabelaRoteamento
-								.transformaStringParaTabela(tabelaRecebidaString);
+								.stringParaTabela(tabelaRecebidaString);
 						Saltos conjunto = new Saltos();
 						conjunto.addSalto(tabelaVizinho.getIdTabela());
 						getRoteador().getTabela().adicionaNovoCaminho(
@@ -171,9 +177,7 @@ public class Servidor extends Thread {
 
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
-				System.out.println("Erro!!!!");
-				new Exception("Erro durante a execucao do servidor!");
+				new ServidorException("Erro durante a execucao do servidor!");
 			}
 		}
 	}

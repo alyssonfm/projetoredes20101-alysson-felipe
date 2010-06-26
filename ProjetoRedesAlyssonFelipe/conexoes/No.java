@@ -9,18 +9,21 @@ import java.util.Iterator;
 import roteamento.Roteador;
 import roteamento.TabelaRoteamento;
 import roteamento.Utilitarios;
+import excecoes.ClientException;
 
 /**
- * Classe No. Classe responsavel por implementar os nos da rede.<br> 
+ * Classe No. Classe responsavel por implementar os nos da rede. 
+ * O no eh representado por meio de um socket Cliente UDP.<br> 
  * @author Alysson Filgueira e Felipe Barbosa<br>
- * @version 1.0.0.5	18 de junho de 2010.<br>
+ * @version 1.0.0.5	25 de junho de 2010.<br>
  *
  */
 
 public class No extends Thread{
 
 	/**
-	 * Atributos da Classe No usados ao londo dos procedimentos e funcoes que fazem parte da classe.<br>
+	 * Atributos da Classe No usados ao londo dos procedimentos 
+	 * e funcoes que fazem parte da classe.<br>
 	 */
 	protected String portaDestino;
 	protected Roteador roteador;
@@ -124,7 +127,9 @@ public class No extends Thread{
 	}
 
 	/**
-	 * Procedimento run. Procedimento no qual o no envia e recebe os pacotes de dados para os outros nos na rede.<br>
+	 * Procedimento run. Procedimento no qual o no 
+	 * envia e recebe os pacotes de dados para 
+	 * os outros nos na rede.<br>
 	 */
 	@SuppressWarnings("unchecked")
 	public void run() {
@@ -137,7 +142,7 @@ public class No extends Thread{
 
 			String sentence;
 
-			sentence = TabelaRoteamento.transformaTabelaParaString(getRoteador()
+			sentence = TabelaRoteamento.tabelaParaString(getRoteador()
 					.getTabela());
 
 			sendData = sentence.getBytes();
@@ -170,10 +175,10 @@ public class No extends Thread{
 						System.out
 								.println("["
 										+ getRoteador().getNumeroRoteador()
-										+ "] Enviou Aviso de Morte do ("
+										+ "] Enviou Aviso de Morte de: ("
 										+ Utilitarios
 												.pegaRoteadorMortoPelaMsg(msgRoteadorMorto)
-										+ ") para [" + idVizinho + "]");
+										+ ") para: [" + idVizinho + "]");
 						new NoMorto(getRoteador(), idVizinho, msgRoteadorMorto);
 					}
 				}
@@ -185,10 +190,9 @@ public class No extends Thread{
 		} catch (Exception e) {
 			e.printStackTrace();
 			try {
-				throw new Exception("Erro!: UDPClient");
+				throw new ClientException("Erro!: UDPClient");
 			} catch (Exception e1) {
 			
-				e1.printStackTrace();
 			}
 		}
 	}

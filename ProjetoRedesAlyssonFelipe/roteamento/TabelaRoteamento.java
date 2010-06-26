@@ -7,25 +7,38 @@ import java.util.Set;
 import java.util.StringTokenizer;
 
 /**
- * 
+ * Classe TabelaRoteamento, classe que implementa 
+ * a tabela de roteamento dos roteadores.<br>
  * @author Alysson Filgueira e Felipe Barbosa.<br>
- * @version 1.0.0.5 21 de junho de 2010.<br>
+ * @version 1.0.0.5 25 de junho de 2010.<br>
  */
 public class TabelaRoteamento {
 
-	private String numeroTabela;
-	
+	private String numeroTabela;	
 	private HashMap<String, SaltosEDistancia> tabela;
 	
 	/**
-	 * 
+	 * Construtor default da classe, cria um HashMap contendo uma string que representa o 
+	 * roteador e um objeto SaltosEDistancia que representa o conjunto de saltos e a 
+	 * distancia de cada salto.<br>
 	 */
 	public TabelaRoteamento(){
 		tabela = new HashMap<String, SaltosEDistancia>();
 	}
 	
 	/**
-	 * 
+	 *  Construtor da Classe que recebe como parametro uma string o identificador
+	 *   da tabela.<br>
+	 * @param idTabela o identificador da tabela.<br>
+	 */
+	public TabelaRoteamento(String idTabela){
+		tabela = new HashMap<String, SaltosEDistancia>();
+		this.numeroTabela = idTabela;
+	}
+	
+	/**
+	 * Procedimento toString, usado para criar a string 
+	 * representando a tabela de roteamento de um roteador.<br>
 	 */
 	@SuppressWarnings("unchecked")
 	public String toString(){
@@ -35,25 +48,16 @@ public class TabelaRoteamento {
 		while(it.hasNext()){
 			String next = (String) it.next();
 			SaltosEDistancia distAndSalto = tabela.get(next);
-			resultado += "[ " + next + " ] = " + distAndSalto.getDistancia() + " - Proximo Salto: [" + distAndSalto.getSalto() + "]\n"; 
+			resultado += "[ " + next + " ] = " + distAndSalto.getDistancia() + " Unidades de Distancia - Proximo Salto: [" + distAndSalto.getSalto() + "]\n"; 
 		}
 		return resultado;
 	}
 	
 	/**
-	 * 
-	 * @param idTabela
-	 */
-	public TabelaRoteamento(String idTabela){
-		tabela = new HashMap<String, SaltosEDistancia>();
-		this.numeroTabela = idTabela;
-	}
-	
-
-	/**
-	 * 
-	 * @param roteador
-	 * @return
+	 * Funcao getDistancia retora a distancia entre o roteador dono da tabela e outro 
+	 * roteador da rede.<br>
+	 * @param roteador o roteador que se deseja conhecer a distancia.<br>
+	 * @return a distancia entre o roteador da tabela e o passado como parametro.<br>
 	 */
 	public int getDistancia(String roteador){
 		return tabela.get(roteador).getDistancia();
@@ -61,8 +65,8 @@ public class TabelaRoteamento {
 	
 
 	/**
-	 * 
-	 * @return
+	 * Funcao getIdTabela, retorna o identificador da tabela.<br>
+	 * @return o numero de identificacao da tabela.<br>
 	 */
 	public String getIdTabela() {
 		return numeroTabela;
@@ -70,8 +74,8 @@ public class TabelaRoteamento {
 
 
 	/**
-	 * 
-	 * @param idTabela
+	 * Procedimento setIdTabela, permite atualizar o identificador da tabela.<br>
+	 * @param idTabela o numero de identificacao da tabela que sera atualizado.<br>
 	 */
 	public void setIdTabela(String idTabela) {
 		this.numeroTabela = idTabela;
@@ -79,8 +83,8 @@ public class TabelaRoteamento {
 
 
 	/**
-	 * 
-	 * @return
+	 * Funcao getTabela, retorna a tabela de roteamento de um roteador.<br>
+	 * @return a tabela de roteamento.<br>
 	 */
 	public HashMap<String, SaltosEDistancia> getTabela() {
 		return tabela;
@@ -88,20 +92,22 @@ public class TabelaRoteamento {
 
 
 	/**
-	 * 
-	 * @param tabela
+	 * Procedimento setTabela, permite a atualizacao da tabela de roteamento 
+	 * de um roteador.<br>
+	 * @param tabela a nova tabela de roteamento de um roteador.<br>
 	 */
 	public void setTabela(HashMap<String, SaltosEDistancia> tabela) {
 		this.tabela = tabela;
 	}
 	
 	/**
-	 * 
-	 * @param tabela
-	 * @return
+	 * Funcao tabelaParaString, funcao que realiza a conversao 
+	 * de uma tabela de roteamento para uma string.<br>
+	 * @param tabela a tabela de roteamento a ser convertida para string.<br>
+	 * @return a string que contem os valores da tabela de roteamento.<br>
 	 */
 	@SuppressWarnings("unchecked")
-	public static String transformaTabelaParaString(TabelaRoteamento tabela){
+	public static String tabelaParaString(TabelaRoteamento tabela){
 		Set<String> set = tabela.getTabela().keySet();
 		Iterator it = set.iterator();
 		String resultado = tabela.getIdTabela() + "#";
@@ -119,9 +125,11 @@ public class TabelaRoteamento {
 	}
 	
 	/**
-	 * 
-	 * @param origem
-	 * @param destino
+	 * Procedimento comparaTabelas, compara duas tabelas, adicionando informacoes
+	 * entre as tabelas, caso a tabela de destino nao possua determinado roteador
+	 * adiciona-o, caso possua compara as distancias.<br>
+	 * @param origem a tabela de origem.<br>
+	 * @param destino a tabela de destino.<br>
 	 */
 	@SuppressWarnings("unchecked")
 	public static void comparaTabelas(TabelaRoteamento origem, TabelaRoteamento destino){
@@ -147,8 +155,10 @@ public class TabelaRoteamento {
 	}
 	
 	/**
-	 * 
-	 * @param origem
+	 * Procedimento atualizaTabela, recebe uma tabela origem como parametro, 
+	 * e atualiza as distancias e os saltos para os roteadores 
+	 * contidos na mesma.<br>
+	 * @param origem a tabela de roteamento que sera atualizada.<br>
 	 */
 	@SuppressWarnings("unchecked")
 	public void atualizaTabela(TabelaRoteamento origem){
@@ -174,11 +184,13 @@ public class TabelaRoteamento {
 	}
 	
 	/**
-	 * 
-	 * @param string
-	 * @return
+	 * Funcao stringParaTabela, realiza a conversao de uma 
+	 * string para uma tabela de roteamento.<br>
+	 * @param string a string a ser convertida.<br>
+	 * @return a tabela de roteamento correspondente a string passada
+	 * como parametro.<br>
 	 */
-	public static TabelaRoteamento transformaStringParaTabela(String string){
+	public static TabelaRoteamento stringParaTabela(String string){
 		TabelaRoteamento tabela = new TabelaRoteamento();
 		StringTokenizer stRoteador = new StringTokenizer(string, "#");
 		tabela.setIdTabela(stRoteador.nextToken());
@@ -200,20 +212,23 @@ public class TabelaRoteamento {
 	}
 	
 	/**
-	 * 
-	 * @param destino
-	 * @param distancia
-	 * @param salto
-	 * @param conjunto
+	 * Procedimento adicionaNovoCaminho, adiciona um novo caminho na tabela de roteamento
+	 * de um roteador.<br>
+	 * @param destino o roteador de destino.<br>
+	 * @param distancia o valor da distancia entre os roteadores.<br>
+	 * @param salto o salto correspondente entre os roteadores.<br>
+	 * @param conjuntoSaltos o conjunto de saltos de um roteador.<br>
 	 */
-	public void adicionaNovoCaminho(String destino, int distancia, String salto, Saltos conjunto){
-		tabela.put(destino, new SaltosEDistancia(distancia,salto,conjunto));
+	public void adicionaNovoCaminho(String destino, int distancia, String salto, Saltos conjuntoSaltos){
+		tabela.put(destino, new SaltosEDistancia(distancia,salto,conjuntoSaltos));
 	}
 	
 	/**
-	 * 
-	 * @param ds
-	 * @param destino
+	 * Procedimento adicionaNovoCaminho, adiciona um novo caminho na tabela 
+	 * de roteamento de um roteador.<br>
+	 * @param ds um objeto da classe SaltosEDistancia, que contem a distancia, o salto e o conjunto de saltos
+	 * de um roteador.<br>
+	 * @param destino o roteador de destino.<br>
 	 */
 	public void adicionaNovoCaminho(SaltosEDistancia ds, String destino){
 		tabela.put(destino, ds);

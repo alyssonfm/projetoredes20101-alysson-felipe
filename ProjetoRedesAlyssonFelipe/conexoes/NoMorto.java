@@ -12,7 +12,7 @@ import roteamento.Roteador;
  * um no ao detectar um no como morto avisa aos seus vizinhos que o no morreu, 
  * para que os mesmos atualizem as suas tabelas de roteamento.<br>
  * @author Alysson Filgueira e Felipe Barbosa.<br>
- * @version 1.0.0.5 21 de junho de 2010.<br>
+ * @version 1.0.0.5 25 de junho de 2010.<br>
  */
 public class NoMorto extends No{
 
@@ -50,7 +50,7 @@ public class NoMorto extends No{
 	}
 
 	/**
-	 * 
+	 * Procedimento executaCliente. Procedimento no qual ocorre a troca de mensagens do NoMorto com os demais nos da rede.<br>
 	 */
 	public void executaCliente() {
 		try {
@@ -77,6 +77,7 @@ public class NoMorto extends No{
 			clientSocket.receive(receivePacket);
 			clientSocket.close();
 		} catch (Exception e) {
+			System.out.println("Nao foi possivel estabelecer conexao. Erro!");
 		}
 	}
 }
