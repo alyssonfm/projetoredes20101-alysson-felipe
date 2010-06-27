@@ -92,7 +92,7 @@ public class Main {
 		int escolha;		
 		System.out.println("\t\tProjeto de Redes de Computadores 2010-1");
 		System.out.println("\t\tAlysson Filgueira e Felipe Barbosa");
-		System.out.println("\t\t=====Menu===== \n1- Alterar configuracoes\n2- Escolher roteador e usar configuracoes padrao\n3- Para encerrar o programa");
+		System.out.println("\t\t\t=====Menu===== \n1- Alterar configuracoes\n2- Escolher roteador e usar configuracoes padrao\n3- Para encerrar o programa");
 		escolha = scanner.nextInt();
 		switch (escolha) {
 		case 1:
