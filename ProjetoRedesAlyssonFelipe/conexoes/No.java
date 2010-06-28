@@ -29,7 +29,7 @@ public class No extends Thread{
 	protected Roteador roteador;
 	protected String ipRoteadorDestino;
 	protected String idRoteadorDestino;
-	protected static int timeout = 1000;
+	protected static int timeout = 10000;
 	
 	/**
 	 * Construtor da classe.<br>

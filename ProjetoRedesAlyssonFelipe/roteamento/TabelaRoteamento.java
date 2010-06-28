@@ -138,16 +138,19 @@ public class TabelaRoteamento {
 		while (it.hasNext()){
 			String nextOrigem = (String) it.next();
 			SaltosEDistancia dsOrigem = origem.getTabela().get(nextOrigem);
+			int distancia1, distancia2;
+			distancia1 = destino.getDistancia(nextOrigem);
+			distancia2 = destino.getDistancia(origem.getIdTabela()) + dsOrigem.getDistancia();
 			if (!destino.getTabela().containsKey(nextOrigem)){
 				Saltos conjunto = new Saltos();
 				conjunto.addSalto(nextOrigem);
 				SaltosEDistancia novoDS = new SaltosEDistancia(destino.getDistancia(origem.getIdTabela()) + dsOrigem.getDistancia(), nextOrigem,conjunto);
 				destino.adicionaNovoCaminho(novoDS, nextOrigem);
 			} else {
-				if (destino.getDistancia(nextOrigem) >  destino.getDistancia(origem.getIdTabela()) + dsOrigem.getDistancia()){
+				if (distancia1 > distancia2){
 					Saltos conjunto = dsOrigem.getConjuntoDeSaltos();
 					conjunto.addSalto(origem.getIdTabela());
-					SaltosEDistancia novoDS = new SaltosEDistancia(destino.getDistancia(origem.getIdTabela()) + dsOrigem.getDistancia(), origem.getIdTabela(),conjunto);
+					SaltosEDistancia novoDS = new SaltosEDistancia(distancia2, origem.getIdTabela(),conjunto);
 					destino.adicionaNovoCaminho(novoDS, nextOrigem);
 				}
 			}

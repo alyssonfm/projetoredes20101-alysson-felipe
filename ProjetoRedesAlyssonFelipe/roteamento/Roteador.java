@@ -23,8 +23,8 @@ public class Roteador extends TimerTask {
 	private String ip;
 	private TabelaRoteamento tabela;
 	private Vizinhos vizinhos;
-	private static int delay = 6000;
-	private static int periodo = 6000;
+	private static int delay = 5000;
+	private static int periodo = 5000;
 
 	/**
 	 * Construtor default da classe Roteador.
@@ -305,4 +305,5 @@ public class Roteador extends TimerTask {
 	public TabelaRoteamento getTabela() {
 		return tabela;
 	}
+	
 }

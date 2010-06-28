@@ -162,6 +162,8 @@ public class Servidor extends Thread {
 								tabelaVizinho.getIdTabela(),conjunto);
 						TabelaRoteamento.comparaTabelas(tabelaVizinho,
 								getRoteador().getTabela());
+						getRoteador().atualizaTabela(tabelaVizinho);
+						
 						System.out
 								.println("["
 										+ getRoteador().getNumeroRoteador()
