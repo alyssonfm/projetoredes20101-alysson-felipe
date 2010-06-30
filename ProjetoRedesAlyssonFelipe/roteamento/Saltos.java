@@ -7,7 +7,7 @@ import java.util.LinkedList;
 /**
  * Classe Saltos. Classe que implementa os "saltos" dos roteadores. <br>
  * @author Alysson Filgueira e Felipe Barbosa. <br>
- * @version 1.0.0.5 25 de junho de 2010.<br>
+ * @version 1.0.0.5 29 de junho de 2010.<br>
  */
 public class Saltos {
 	private LinkedList<String> conjuntoDeSaltos;

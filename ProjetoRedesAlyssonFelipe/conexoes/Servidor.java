@@ -18,7 +18,7 @@ import roteamento.Utilitarios;
 /**
  * Classe Servidor. Classe responsavel por implementar as funcionalidades do servidor UDP do sistema.<br>
  * @author Alysson Filgueira e Felipe Barbosa.<br>
- * @version 1.0.0.5 25 de junho de 2010.<br>
+ * @version 1.0.0.5 29 de junho de 2010.<br>
  */
 public class Servidor extends Thread {
 	private Roteador roteador;
@@ -120,7 +120,7 @@ public class Servidor extends Thread {
 						StringTokenizer st = new StringTokenizer(
 								tabelaRecebidaString, "!");
 						String idRoteadorMorto = st.nextToken();
-						getRoteador().setaNoInfinito(idRoteadorMorto);
+						getRoteador().setaParaInfinito(idRoteadorMorto);
 						LinkedList<String> listaReceberam = new LinkedList<String>();
 						StringTokenizer stReceberam = new StringTokenizer(st
 								.nextToken(), "#");
@@ -163,7 +163,7 @@ public class Servidor extends Thread {
 						TabelaRoteamento.comparaTabelas(tabelaVizinho,
 								getRoteador().getTabela());
 						getRoteador().atualizaTabela(tabelaVizinho);
-						
+																		
 						System.out
 								.println("["
 										+ getRoteador().getNumeroRoteador()

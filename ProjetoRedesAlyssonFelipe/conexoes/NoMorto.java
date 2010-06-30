@@ -4,6 +4,8 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
+import excecoes.ClientException;
+
 import roteamento.Roteador;
 
 /**
@@ -12,7 +14,7 @@ import roteamento.Roteador;
  * um no ao detectar um no como morto avisa aos seus vizinhos que o no morreu, 
  * para que os mesmos atualizem as suas tabelas de roteamento.<br>
  * @author Alysson Filgueira e Felipe Barbosa.<br>
- * @version 1.0.0.5 25 de junho de 2010.<br>
+ * @version 1.0.0.5 29 de junho de 2010.<br>
  */
 public class NoMorto extends No{
 
@@ -77,7 +79,7 @@ public class NoMorto extends No{
 			clientSocket.receive(receivePacket);
 			clientSocket.close();
 		} catch (Exception e) {
-			System.out.println("Nao foi possivel estabelecer conexao. Erro!");
+			new ClientException("Nao foi possivel estabelecer conexao");
 		}
 	}
 }

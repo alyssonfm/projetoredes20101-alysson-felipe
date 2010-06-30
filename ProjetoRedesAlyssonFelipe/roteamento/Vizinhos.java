@@ -8,7 +8,7 @@ import java.util.LinkedList;
  * Classe Vizinhos. Eh a classe que implementa as 
  * funcionalidades relativas aos vizinhos de cada roteador. <br>
  * @author Alysson Filgueira e Felipe Barbosa.<br>
- * @version 1.0.0.5 25 de junho de 2010.<br>
+ * @version 1.0.0.5 29 de junho de 2010.<br>
  */
 public class Vizinhos {
 
@@ -60,7 +60,7 @@ public class Vizinhos {
 	 */
 	@SuppressWarnings("unchecked")
 	public String toString(){
-		String resultado = "Vizinhos de " + getIdRoteador() + ": "; 
+		String resultado = "Os vizinhos de " + getIdRoteador() + " sao : "; 
 		Iterator it = vizinhos.iterator();
 		while (it.hasNext()){
 			resultado += it.next() + ", ";

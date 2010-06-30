@@ -15,7 +15,7 @@ import excecoes.ClientException;
  * Classe No. Classe responsavel por implementar os nos da rede. 
  * O no eh representado por meio de um socket Cliente UDP.<br> 
  * @author Alysson Filgueira e Felipe Barbosa<br>
- * @version 1.0.0.5	25 de junho de 2010.<br>
+ * @version 1.0.0.5	29 de junho de 2010.<br>
  *
  */
 
@@ -164,7 +164,7 @@ public class No extends Thread{
 					+ getIdRoteadorDestino() + "]");
 
 		} catch (SocketTimeoutException stoExcption) {
-			getRoteador().setaNoInfinito(idRoteadorDestino);
+			getRoteador().setaParaInfinito(idRoteadorDestino);
 			String msgRoteadorMorto = Utilitarios.geraMsgRoteadorMorto(
 					getRoteador(), idRoteadorDestino);
 			try {
@@ -184,11 +184,9 @@ public class No extends Thread{
 				}
 			} catch (Exception e) {
 				
-				e.printStackTrace();
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
 			try {
 				throw new ClientException("Erro!: UDPClient");
 			} catch (Exception e1) {

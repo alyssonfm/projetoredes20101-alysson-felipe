@@ -7,7 +7,7 @@ import java.io.IOException;
  * Subclasse de IOException, usada quando o programa lanca
  *  excecoes para arquivos nao encontrados.<br>
  * @author Alysson Filgueira e Felipe Barbosa. <br>
- * @version 1.0.0.5 25 de junho de 2010.<br>
+ * @version 1.0.0.5 29 de junho de 2010.<br>
  */
 @SuppressWarnings("serial")
 public class ArquivoNaoEncontradoException extends IOException {

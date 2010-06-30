@@ -13,7 +13,7 @@ import conexoes.No;
  * iremos usar na simulacao da rede. Alem disso eh possivel 
  * alterar configuracoes do programa.<br>
  * @author Alysson Filgueira e Felipe Barbosa. <br>
- * @version 1.0.0.5 25 de junho de 2010.
+ * @version 1.0.0.5 29 de junho de 2010.
  */
 public class Main {
 	
@@ -92,7 +92,7 @@ public class Main {
 		int escolha;		
 		System.out.println("\t\tProjeto de Redes de Computadores 2010-1");
 		System.out.println("\t\tAlysson Filgueira e Felipe Barbosa");
-		System.out.println("\n\t\t\t=====Menu===== \n1- Alterar configuracoes\n2- Escolher roteador e usar configuracoes padrao\n3- Para encerrar o programa");
+		System.out.println("\n\t\t\t=====Menu=====\n \n1- Alterar configuracoes\n2- Escolher roteador e usar configuracoes padrao\n3- Para encerrar o programa");
 		escolha = scanner.nextInt();
 		switch (escolha) {
 		case 1:

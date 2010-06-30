@@ -5,7 +5,7 @@ package excecoes;
  * criada para indicar que ocorreu uma excecao durante a 
  * execucao do Servidor da rede (Servidor UDP).<br>
  * @author Alysson Filgueira e Felipe Barbosa.<br>
- * @version	1.0.0.5 25 de junho de 2010.<br>
+ * @version	1.0.0.5 29 de junho de 2010.<br>
  */
 @SuppressWarnings("serial")
 public class ServidorException extends Exception{

@@ -10,7 +10,7 @@ import java.util.StringTokenizer;
  * Classe TabelaRoteamento, classe que implementa 
  * a tabela de roteamento dos roteadores.<br>
  * @author Alysson Filgueira e Felipe Barbosa.<br>
- * @version 1.0.0.5 25 de junho de 2010.<br>
+ * @version 1.0.0.5 29 de junho de 2010.<br>
  */
 public class TabelaRoteamento {
 
@@ -44,11 +44,12 @@ public class TabelaRoteamento {
 	public String toString(){
 		Set<String> set = tabela.keySet();
 		Iterator it = set.iterator();
-		String resultado = "Tabela [" + getIdTabela() + "] \n";
+		String resultado = "Tabela do [" + getIdTabela() + "] \n";
 		while(it.hasNext()){
+			atualizaTabela(this);
 			String next = (String) it.next();
 			SaltosEDistancia distAndSalto = tabela.get(next);
-			resultado += "[ " + next + " ] = " + distAndSalto.getDistancia() + " Unidades de Distancia - Proximo Salto: [" + distAndSalto.getSalto() + "]\n"; 
+			resultado += "[ " + next + " ] = " + this.getDistancia(next) + " Unidades de Distancia - Proximo Salto: [" + distAndSalto.getSalto() + "]\n"; 
 		}
 		return resultado;
 	}
@@ -138,19 +139,19 @@ public class TabelaRoteamento {
 		while (it.hasNext()){
 			String nextOrigem = (String) it.next();
 			SaltosEDistancia dsOrigem = origem.getTabela().get(nextOrigem);
-			int distancia1, distancia2;
-			distancia1 = destino.getDistancia(nextOrigem);
-			distancia2 = destino.getDistancia(origem.getIdTabela()) + dsOrigem.getDistancia();
+			int antigaDistancia, novaDistancia;
+			antigaDistancia = destino.getDistancia(nextOrigem);
+			novaDistancia = destino.getDistancia(origem.getIdTabela()) + origem.getDistancia(nextOrigem);
 			if (!destino.getTabela().containsKey(nextOrigem)){
 				Saltos conjunto = new Saltos();
 				conjunto.addSalto(nextOrigem);
-				SaltosEDistancia novoDS = new SaltosEDistancia(destino.getDistancia(origem.getIdTabela()) + dsOrigem.getDistancia(), nextOrigem,conjunto);
+				SaltosEDistancia novoDS = new SaltosEDistancia(novaDistancia, nextOrigem,conjunto);
 				destino.adicionaNovoCaminho(novoDS, nextOrigem);
 			} else {
-				if (distancia1 > distancia2){
+				if (antigaDistancia > novaDistancia){
 					Saltos conjunto = dsOrigem.getConjuntoDeSaltos();
 					conjunto.addSalto(origem.getIdTabela());
-					SaltosEDistancia novoDS = new SaltosEDistancia(distancia2, origem.getIdTabela(),conjunto);
+					SaltosEDistancia novoDS = new SaltosEDistancia(novaDistancia, origem.getIdTabela(), conjunto);
 					destino.adicionaNovoCaminho(novoDS, nextOrigem);
 				}
 			}
@@ -170,16 +171,19 @@ public class TabelaRoteamento {
 		while (it.hasNext()){
 			String nextOrigem = (String) it.next();
 			SaltosEDistancia dsOrigem = origem.getTabela().get(nextOrigem);
+			int antigaDistancia, novaDistancia;
+			antigaDistancia = this.getDistancia(nextOrigem);
+			novaDistancia = this.getDistancia(origem.getIdTabela()) + dsOrigem.getDistancia();
 			if (!this.getTabela().containsKey(nextOrigem)){
 				Saltos conjunto = new Saltos();
 				conjunto.addSalto(nextOrigem);
-				SaltosEDistancia novoDS = new SaltosEDistancia(this.getDistancia(origem.getIdTabela()) + dsOrigem.getDistancia(), nextOrigem,conjunto);
+				SaltosEDistancia novoDS = new SaltosEDistancia(novaDistancia, nextOrigem,conjunto);
 				this.adicionaNovoCaminho(novoDS, nextOrigem);
 			} else {
-				if (this.getDistancia(nextOrigem) >  this.getDistancia(origem.getIdTabela()) + dsOrigem.getDistancia()){
+				if (antigaDistancia > novaDistancia){
 					Saltos conjunto = dsOrigem.getConjuntoDeSaltos();
 					conjunto.addSalto(nextOrigem);
-					SaltosEDistancia novoDS = new SaltosEDistancia(this.getDistancia(origem.getIdTabela()) + dsOrigem.getDistancia(), origem.getIdTabela(),conjunto);
+					SaltosEDistancia novoDS = new SaltosEDistancia(novaDistancia, origem.getIdTabela(),conjunto);
 					this.adicionaNovoCaminho(novoDS, nextOrigem);
 				}
 			}

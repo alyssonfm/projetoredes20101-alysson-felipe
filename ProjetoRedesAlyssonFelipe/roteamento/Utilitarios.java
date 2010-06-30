@@ -16,7 +16,7 @@ import excecoes.ArquivoNaoEncontradoException;
  * Classe Utilitarios. Classe usada para fornecer algumas 
  * funcionalidades a outras classes do programa.<br>
  * @author Alysson Filgueira e Felipe Barbosa.<br>
- * @version 1.0.0.5 25 de junho de 2010.<br>
+ * @version 1.0.0.5 29 de junho de 2010.<br>
  */
 public  class Utilitarios {
 	

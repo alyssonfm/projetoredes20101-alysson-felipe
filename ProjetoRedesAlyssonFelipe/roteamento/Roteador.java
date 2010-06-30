@@ -13,7 +13,7 @@ import conexoes.Servidor;
  * Classe Roteador. Classe responsavel por implementar 
  * uma abstracao de um roteador real.<br>
  * @author Alysson Filgueira e Felipe Barbosa. <br>
- * @version 1.0.0.5 25 de junho de 2010.
+ * @version 1.0.0.5 29 de junho de 2010.
  */
 public class Roteador extends TimerTask {
 
@@ -23,8 +23,8 @@ public class Roteador extends TimerTask {
 	private String ip;
 	private TabelaRoteamento tabela;
 	private Vizinhos vizinhos;
-	private static int delay = 5000;
-	private static int periodo = 5000;
+	private static int delay = 3500;
+	private static int periodo = 3500;
 
 	/**
 	 * Construtor default da classe Roteador.
@@ -162,14 +162,14 @@ public class Roteador extends TimerTask {
 	}
 
 	/**
-	 * Procedimento setaNoInfinito. Usado para setar a distancia ate 
-	 * um vizinho para o infinito caso nao se tenha a distancia ate ele.<br>
+	 * Procedimento setaParaInfinito. Usado para setar a distancia ate 
+	 * um vizinho para infinito caso nao se conheca a distancia ate ele.<br>
 	 * @param numeroVizinho Numero do vizinho cuja distancia 
 	 * sera setada para infinito. Vizinho que nao esta ligado ou 
 	 * nao se conhece distancia ate ele. <br>
 	 */
 	@SuppressWarnings("unchecked")
-	public void setaNoInfinito(String numeroVizinho) {
+	public void setaParaInfinito(String numeroVizinho) {
 		TabelaRoteamento tabelaRoteamento = getTabela();
 		Saltos conjunto = new Saltos();
 		conjunto.addSalto("*");
@@ -290,7 +290,7 @@ public class Roteador extends TimerTask {
 	 */
 	@Override
 	public void run() {
-		System.out.println(getTabela());
+		System.out.println(getTabela());		
 		try {
 			TabelaDeEnvio();
 		} catch (Exception e) {
