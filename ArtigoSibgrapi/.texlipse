@@ -1,0 +1,13 @@
+#TeXlipse project settings
+#Wed May 25 10:12:18 GMT-03:00 2011
+builderNum=4
+outputDir=
+makeIndSty=
+bibrefDir=
+outputFormat=pdf
+tempDir=tmp
+mainTexFile=AlgoritmosDiagramacaoDocumentos.tex
+outputFile=AlgoritmosDiagramacaoDocumentos.pdf
+langSpell=en
+markDer=true
+srcDir=
